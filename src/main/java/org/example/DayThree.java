@@ -35,7 +35,7 @@ public class DayThree {
             String line;
             while ((line = br.readLine()) != null) {
 
-                String[] pairArray = doSection
+                String[] pairArray = doSectionInclLineBr
                         .matcher(line)
                         .results()
                         .map(MatchResult::group)

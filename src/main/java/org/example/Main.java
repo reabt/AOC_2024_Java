@@ -1,20 +1,12 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
 //        DayOne dayOne = new DayOne();
-        DayTwo dayTwo = new DayTwo();
+//        DayTwo dayTwo = new DayTwo();
 //        DayThree dayThree = new DayThree();
-
-
+        DayFour dayFour = new DayFour();
     }
 
 //    public static void readFile(InputStream inputStream) {

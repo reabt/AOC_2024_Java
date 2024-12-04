@@ -1,3 +1,5 @@
+package org.example;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,7 +33,7 @@ public class DayTwo {
                 }
 
                 if (isSortedAndValid(levelsList)) {
-                    safe++;
+                    safe = safe +1;
                 } else {
                     unsafeLevels.add(levelsList);
                 }
@@ -39,11 +41,11 @@ public class DayTwo {
 
             for (List<Integer> unsafeLevel : unsafeLevels) {
                 if (canBeSafeWithOneRemoval(unsafeLevel)) {
-                    safe++;
+                    safe = safe +1;
                 }
             }
 
-            System.out.println("Safe reports: " + safe);
+            System.out.println(safe);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -55,18 +57,31 @@ public class DayTwo {
 
     private boolean isSortedAsc(List<Integer> levelsList) {
         for (int i = 1; i < levelsList.size(); i++) {
+
             int diff = levelsList.get(i) - levelsList.get(i - 1);
-            if (diff < 1 || diff > 3) return false; // Invalid difference
-            if (levelsList.get(i) < levelsList.get(i - 1)) return false; // Not increasing
+
+            if (diff < 1 || diff > 3) {
+                return false;
+            }
+            if (levelsList.get(i) < levelsList.get(i - 1)) {
+                return false;
+            }
         }
         return true;
     }
 
     private boolean isSortedDesc(List<Integer> levelsList) {
         for (int i = 1; i < levelsList.size(); i++) {
+
             int diff = levelsList.get(i - 1) - levelsList.get(i);
-            if (diff < 1 || diff > 3) return false; // Invalid difference
-            if (levelsList.get(i) > levelsList.get(i - 1)) return false; // Not decreasing
+
+            if (diff < 1 || diff > 3) {
+                return false;
+            }
+
+            if (levelsList.get(i) > levelsList.get(i - 1)) {
+                return false;
+            }
         }
         return true;
     }
@@ -74,11 +89,11 @@ public class DayTwo {
     private boolean canBeSafeWithOneRemoval(List<Integer> levelsList) {
         for (int i = 0; i < levelsList.size(); i++) {
             List<Integer> modifiedList = new ArrayList<>(levelsList);
-            modifiedList.remove(i); // Remove one element
+            modifiedList.remove(i);
             if (isSortedAndValid(modifiedList)) {
-                return true; // Found a valid list
+                return true;
             }
         }
-        return false; // No valid list found
+        return false;
     }
 }
