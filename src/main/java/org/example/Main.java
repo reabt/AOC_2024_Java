@@ -6,7 +6,8 @@ public class Main {
 //        DayOne dayOne = new DayOne();
 //        DayTwo dayTwo = new DayTwo();
 //        DayThree dayThree = new DayThree();
-        DayFour dayFour = new DayFour();
+//        DayFour dayFour = new DayFour();
+        DayFive dayFive = new DayFive();
     }
 
 //    public static void readFile(InputStream inputStream) {
