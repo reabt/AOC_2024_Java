@@ -30,8 +30,9 @@ public class DayFive {
 
     private void solvep1(List<Pair<Integer>> inRules, List<RowToPrint> inToPrint) {
 
-        for (Pair<Integer> rule : inRules) { // for each rule
-            for (RowToPrint line : inToPrint) { // for each line of pages to print
+        for (RowToPrint line : inToPrint) {
+            for (Pair<Integer> rule : inRules) { // for each rule
+             // for each line of pages to print
 
                 if (line.getNums().contains(rule.getp1()) && line.getNums().contains(rule.getp2())) { // find all toPrint sections that contain BOTH parts of rule
 
@@ -51,7 +52,7 @@ public class DayFive {
 
         for (RowToPrint row : inSafeRows) {
             if (row.getIsSafe()) {
-                int middleIndex = ((row.getNums().size()-1) /2);
+                int middleIndex = ((row.getNums().size()) /2);
                 int val = row.getNums().get(middleIndex);
 
                 total += val;
@@ -90,7 +91,7 @@ public class DayFive {
         }
     }
 
-    public class Pair<Integer> {
+    public static class Pair<Integer> {
 
         private final Integer p1;
         private final Integer p2;

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class DayTwo {
+    private int day = 2;
     private int safe = 0;
 
     public DayTwo() {
@@ -15,7 +16,7 @@ public class DayTwo {
 
     private void setup() {
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("input2.txt");
+        InputStream inputStream = classLoader.getResourceAsStream(String.format("input{}.txt", day));
         readFile(inputStream);
     }
 
