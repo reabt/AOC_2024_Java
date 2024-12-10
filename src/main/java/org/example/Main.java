@@ -1,14 +1,20 @@
 package org.example;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 //        DayOne dayOne = new DayOne();
 //        DayTwo dayTwo = new DayTwo();
 //        DayThree dayThree = new DayThree();
 //        DayFour dayFour = new DayFour();
 //        DayFive dayFive = new DayFive();
         DaySix daySix = new DaySix();
+
+
+        daySix.getAns(); // way to instantiate this as an implementation of the interface to avoid having to call
+        // getAns() on a different class type each day??
 
     }
 

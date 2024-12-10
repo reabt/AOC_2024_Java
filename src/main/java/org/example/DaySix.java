@@ -4,20 +4,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class DaySix {
+public class DaySix extends ProblemClass {
     private int x, y;
+    private static final int DAY = 6;
     private final Set<DayFive.Pair<Integer>> path = new HashSet<>();
     private char direction = 'U';
     boolean moving = true;
+    private int ANSWER;
 
     List<List<String>> puzzle = new ArrayList<>();
 
 
-    public DaySix() {
-        setup();
+    public DaySix() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        this.clazz = this.getClass();
+
+        setup(DAY);
     }
+
 
     public void move() {
         while (moving) {
@@ -70,18 +76,12 @@ public class DaySix {
         }
     }
 
-
-    private void setup() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("input6.txt");
-        readFile(inputStream);
-    }
-
-    private void readFile(InputStream inputStream) {
+    private void readFile(InputStream inputStream) { // needs some more logic extracting to remove duplicated code
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
 
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) { // extract to here
+
                 String[] currentRowArr = line.split("");
                 List<String> currentRow = new ArrayList<>();
 
@@ -100,10 +100,15 @@ public class DaySix {
 
             path.add(new DayFive.Pair<>(x, y));
             move();
-            System.out.println(path.size());
+            ANSWER = path.size();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public void getAns() {
+        System.out.println(this.ANSWER);
+    }
+
 }

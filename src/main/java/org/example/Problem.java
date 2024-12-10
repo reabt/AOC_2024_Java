@@ -1,10 +1,10 @@
 package org.example;
 
-import java.io.BufferedReader;
+import java.lang.reflect.InvocationTargetException;
 
 public interface Problem {
 
-    public void setup();
+    public void setup(int inDay) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 
     public void part1();
 
