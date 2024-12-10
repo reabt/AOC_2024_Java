@@ -7,10 +7,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class DaySix {
-
-    private int day = 6;
     private int x, y;
-    private final Set<DayFive.Pair<Integer>> path = new HashSet<DayFive.Pair<Integer>>();
+    private final Set<DayFive.Pair<Integer>> path = new HashSet<>();
     private char direction = 'U';
     boolean moving = true;
 
@@ -72,31 +70,6 @@ public class DaySix {
         }
     }
 
-    private void calculateTotal(List<DayFive.Pair<Integer>> path) { // calculate how many unique pairs of ints there are in path
-        List<DayFive.Pair<Integer>> pathCopy = new ArrayList<>(path);
-
-        int startIndex = 1;
-
-        for (DayFive.Pair<Integer> pair : path) {
-
-            int first = pair.getp1();
-            int second = pair.getp2();
-
-            for (int i = startIndex; i < path.size() -1; i++) {
-
-                startIndex = path.indexOf(pair) + 1;
-
-                int path1 = path.get(startIndex).getp1();
-                int path2 = path.get(startIndex).getp2();
-
-                if ((first == path1) & (second == path2)) {
-                    pathCopy.remove(path.get(i));
-                }
-            }
-        }
-        System.out.println(pathCopy.size() + 2);
-    }
-
 
     private void setup() {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -125,8 +98,9 @@ public class DaySix {
                 puzzle.add(currentRow);
             }
 
+            path.add(new DayFive.Pair<>(x, y));
             move();
-            System.out.println(path.size() + 1);
+            System.out.println(path.size());
 
         } catch (IOException e) {
             throw new RuntimeException(e);
