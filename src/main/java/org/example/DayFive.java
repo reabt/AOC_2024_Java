@@ -109,6 +109,19 @@ public class DayFive {
             return this.p2;
         }
 
+
+        @Override
+        public boolean equals (Object obj) {
+            if (this == obj) return true;
+
+            if (!(obj instanceof Pair)) return false;Pair<?> other = (Pair<?>) obj;
+            return Objects.equals(p1, other.p1) && Objects.equals(p2, other.p2);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(p1, p2);
+        }
     }
 
     public class RowToPrint { // todo

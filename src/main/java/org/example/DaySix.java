@@ -4,15 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class DaySix {
 
     private int day = 6;
     private int x, y;
-    private final List<DayFive.Pair<Integer>> path = new ArrayList<>();
+    private final Set<DayFive.Pair<Integer>> path = new HashSet<DayFive.Pair<Integer>>();
     private char direction = 'U';
     boolean moving = true;
 
@@ -69,7 +67,7 @@ public class DaySix {
 
 
     private void checkIfAtExit() {
-        if  (y < 0 || y > puzzle.size() || x < 0 || x > puzzle.getLast().size()) {
+        if  (y < 1 || y > puzzle.size() || x < 1 || x > puzzle.getLast().size()) {
             moving = false;
         }
     }
@@ -125,12 +123,10 @@ public class DaySix {
                 }
 
                 puzzle.add(currentRow);
-
             }
 
-            // solve
             move();
-            calculateTotal(path);
+            System.out.println(path.size() + 1);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
