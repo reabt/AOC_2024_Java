@@ -76,35 +76,28 @@ public class DaySix extends ProblemClass {
         }
     }
 
-    private void readFile(InputStream inputStream) { // needs some more logic extracting to remove duplicated code
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
+    private void parse (String line) {
 
-            while ((line = br.readLine()) != null) { // extract to here
+        String[] currentRowArr = line.split("");
+        List<String> currentRow = new ArrayList<>();
 
-                String[] currentRowArr = line.split("");
-                List<String> currentRow = new ArrayList<>();
+        for (int i = 0; i < currentRowArr.length; i++) {
 
-                for (int i = 0; i < currentRowArr.length; i++) {
-
-                    if (Objects.equals(currentRowArr[i], "^")) {
-                        x = i;
-                        y = puzzle.size();
-                    }
-
-                    currentRow.add(currentRowArr[i]);
-                }
-
-                puzzle.add(currentRow);
+            if (Objects.equals(currentRowArr[i], "^")) {
+                x = i;
+                y = puzzle.size();
             }
 
-            path.add(new DayFive.Pair<>(x, y));
-            move();
-            ANSWER = path.size();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            currentRow.add(currentRowArr[i]);
         }
+
+        puzzle.add(currentRow);
+    }
+
+    public void solve() {
+        path.add(new DayFive.Pair<>(x, y));
+        move();
+        ANSWER = path.size();
     }
 
     public void getAns() {

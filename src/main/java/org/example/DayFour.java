@@ -7,13 +7,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DayFour {
+public class DayFour extends ProblemClass {
     public List<List<Character>> letters = new ArrayList<>();
 
     int found = 0;
 
     public DayFour() {
-       System.out.println("eeee");
         setup();
     }
 

@@ -9,11 +9,11 @@ public class Main {
 //        DayTwo dayTwo = new DayTwo();
 //        DayThree dayThree = new DayThree();
 //        DayFour dayFour = new DayFour();
-//        DayFive dayFive = new DayFive();
-        DaySix daySix = new DaySix();
+        DayFive dayFive = new DayFive();
+//        DaySix daySix = new DaySix();
 
 
-        daySix.getAns(); // way to instantiate this as an implementation of the interface to avoid having to call
+        dayFive.getAns(); // way to instantiate this as an implementation of the interface to avoid having to call
         // getAns() on a different class type each day??
 
     }

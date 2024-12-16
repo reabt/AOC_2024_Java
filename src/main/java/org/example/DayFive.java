@@ -1,38 +1,25 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class DayFive {
+public class DayFive extends ProblemClass implements Problem {
 
-    public DayFive() {
-        setup();
+    public DayFive() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        this.clazz = this.getClass();
+        setup(DAY);
     }
     int total = 0;
+    private static final int DAY = 5;
 
     private final List<Pair<Integer>> rules = new ArrayList<>();
     private final List<RowToPrint> toPrint = new ArrayList<>();
 
-    private void setup() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("input5.txt");
-        readFile(inputStream);
 
-        solvep1(rules, toPrint);
-
-        addMiddles(toPrint);
-        System.out.println(total);
-
-    }
-
-    private void solvep1(List<Pair<Integer>> inRules, List<RowToPrint> inToPrint) {
-
-        for (RowToPrint line : inToPrint) {
-            for (Pair<Integer> rule : inRules) { // for each rule
-             // for each line of pages to print
+    public void solve() {
+        for (RowToPrint line : toPrint) {
+            for (Pair<Integer> rule : rules) { // for each rule
+                // for each line of pages to print
 
                 if (line.getNums().contains(rule.getp1()) && line.getNums().contains(rule.getp2())) { // find all toPrint sections that contain BOTH parts of rule
 
@@ -46,6 +33,8 @@ public class DayFive {
                 }
             }
         }
+
+        addMiddles(toPrint);
     }
 
     private void addMiddles(List<RowToPrint> inSafeRows) {
@@ -60,35 +49,30 @@ public class DayFive {
         }
     }
 
-    private void readFile(InputStream inputStream) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
+    public void parse(String line) {
+        if (line.contains("|")) { // parse printing rules
 
-            while ((line = br.readLine()) != null) {
+            String[] ruleNums = line.split("\\|");
+            int r1 = Integer.parseInt(ruleNums[0].strip());
+            int r2 = Integer.parseInt(ruleNums[1].strip());
+            Pair<Integer> pair = new Pair<>(r1, r2);
 
-                if (line.contains("|")) { // parse printing rules
+            rules.add(pair);
 
-                    String[] ruleNums = line.split("\\|");
-                    int r1 = Integer.parseInt(ruleNums[0].strip());
-                    int r2 = Integer.parseInt(ruleNums[1].strip());
-                    Pair<Integer> pair = new Pair<>(r1, r2);
+        } else if (!line.isBlank()) { // parse lines of page numbers
 
-                    rules.add(pair);
+            String[] nums = line.split(",");
+            List<Integer> inPages = new ArrayList<>();
 
-                } else if (!line.isBlank()) { // parse lines of page numbers
-
-                    String[] nums = line.split(",");
-                    List<Integer> inPages = new ArrayList<>();
-
-                    for (String num : nums) {
-                        inPages.add(Integer.parseInt(num));
-                    }
-                    toPrint.add(new RowToPrint(inPages, true));
-                }
+            for (String num : nums) {
+                inPages.add(Integer.parseInt(num));
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            toPrint.add(new RowToPrint(inPages, true));
         }
+    }
+
+    public void getAns() {
+        System.out.println(total);
     }
 
     public static class Pair<Integer> {
@@ -124,7 +108,7 @@ public class DayFive {
         }
     }
 
-    public class RowToPrint { // todo
+    public static class RowToPrint { // todo
         private final List<Integer> nums;
         Boolean isSafe;
 
